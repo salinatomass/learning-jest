@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import ProviderMock from '../../__mocks__/ProviderMock';
 import Header from '../../components/Header';
+import { create } from 'react-test-renderer';
 
 describe('<Header />', () => {
   test('Header component rendering', () => {
@@ -21,5 +22,17 @@ describe('<Header />', () => {
     );
 
     expect(header.find('.Header-title').text()).toEqual('Platzi Store');
+  });
+});
+
+describe('Header Snapshot', () => {
+  test('Check Header UI', () => {
+    const header = create(
+      <ProviderMock>
+        <Header />
+      </ProviderMock>
+    );
+
+    expect(header.toJSON()).toMatchSnapshot();
   });
 });
